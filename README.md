@@ -74,7 +74,7 @@ npm run preview
 * Torpaq nəmlik sensoru
 * Temperatur sensoru
 * Su nasosu və idarəetmə modulu
-* React + Vite (dashboard veb interfeysi)
+* React + Vite (dashboard web interfeysi)
 
 ---
 

@@ -15,8 +15,17 @@ const theme = {
   textDim: "#3d5c3d",
 };
 
-const CROPS = ["Buğda", "Pambıq", "Üzüm", "Kartof", "Pomidor"];
+const CROPS = ["Buğday", "Pambıq", "Üzüm", "Kartof", "Pomidor"];
 const REGIONS = ["Kür-Araz Ovalığı", "Mil Düzü", "Muğan", "Şirvan", "Lənkəran"];
+
+function randomFloat() {
+  if (typeof globalThis !== "undefined" && globalThis.crypto && typeof globalThis.crypto.getRandomValues === "function") {
+    const arr = new Uint32Array(1);
+    globalThis.crypto.getRandomValues(arr);
+    return arr[0] / 4294967296;
+  }
+  return 0.5;
+}
 
 function useSensorData() {
   const [data, setData] = useState({
@@ -31,12 +40,12 @@ function useSensorData() {
   useEffect(() => {
     const interval = setInterval(() => {
       setData((prev) => ({
-        moisture: Math.max(10, Math.min(90, prev.moisture + (Math.random() - 0.48) * 2)),
-        temperature: Math.max(12, Math.min(40, prev.temperature + (Math.random() - 0.5) * 0.4)),
-        ph: Math.max(5.5, Math.min(8.5, prev.ph + (Math.random() - 0.5) * 0.05)),
-        salinity: Math.max(0.1, Math.min(5, prev.salinity + (Math.random() - 0.45) * 0.05)),
-        nitrogen: Math.max(10, Math.min(90, prev.nitrogen + (Math.random() - 0.48) * 1.5)),
-        score: Math.max(20, Math.min(95, prev.score + (Math.random() - 0.45) * 1.2)),
+        moisture: Math.max(10, Math.min(90, prev.moisture + (randomFloat() - 0.48) * 2)),
+        temperature: Math.max(12, Math.min(40, prev.temperature + (randomFloat() - 0.5) * 0.4)),
+        ph: Math.max(5.5, Math.min(8.5, prev.ph + (randomFloat() - 0.5) * 0.05)),
+        salinity: Math.max(0.1, Math.min(5, prev.salinity + (randomFloat() - 0.45) * 0.05)),
+        nitrogen: Math.max(10, Math.min(90, prev.nitrogen + (randomFloat() - 0.48) * 1.5)),
+        score: Math.max(20, Math.min(95, prev.score + (randomFloat() - 0.45) * 1.2)),
       }));
     }, 2000);
     return () => clearInterval(interval);
@@ -53,15 +62,15 @@ function useForecast() {
       const t = i / 30;
       withSSD.push({
         day: i,
-        score: Math.max(55, startScore + 10 * Math.sin(t * Math.PI * 0.7) - t * 3 + (Math.random() - 0.5) * 2),
-        moisture: Math.max(35, startMoisture + 8 * Math.sin(t * Math.PI) - t * 2 + (Math.random() - 0.5) * 3),
-        salinity: Math.max(0.8, startSalinity - t * 0.3 + (Math.random() - 0.5) * 0.05),
+        score: Math.max(55, startScore + 10 * Math.sin(t * Math.PI * 0.7) - t * 3 + (randomFloat() - 0.5) * 2),
+        moisture: Math.max(35, startMoisture + 8 * Math.sin(t * Math.PI) - t * 2 + (randomFloat() - 0.5) * 3),
+        salinity: Math.max(0.8, startSalinity - t * 0.3 + (randomFloat() - 0.5) * 0.05),
       });
       withoutSSD.push({
         day: i,
-        score: Math.max(15, startScore - t * 28 - (Math.random() * 3)),
-        moisture: Math.max(8, startMoisture - t * 22 - (Math.random() * 4)),
-        salinity: Math.min(6, startSalinity + t * 2.1 + (Math.random() * 0.2)),
+        score: Math.max(15, startScore - t * 28 - (randomFloat() * 3)),
+        moisture: Math.max(8, startMoisture - t * 22 - (randomFloat() * 4)),
+        salinity: Math.min(6, startSalinity + t * 2.1 + (randomFloat() * 0.2)),
       });
     }
     return { withSSD, withoutSSD };
@@ -285,8 +294,8 @@ export default function App() {
     { time: "23:51", msg: "Duz səviyyəsi yüksəlir — diqqət", type: "warn" },
   ]);
   const [history, setHistory] = useState({
-    moisture: Array.from({ length: 20 }, (_, i) => 38 + Math.sin(i * 0.5) * 8 + Math.random() * 3),
-    score: Array.from({ length: 20 }, (_, i) => 61 + Math.sin(i * 0.4) * 6 + Math.random() * 2),
+    moisture: Array.from({ length: 20 }, (_, i) => 38 + Math.sin(i * 0.5) * 8 + randomFloat() * 3),
+    score: Array.from({ length: 20 }, (_, i) => 61 + Math.sin(i * 0.4) * 6 + randomFloat() * 2),
   });
 
   useEffect(() => {
