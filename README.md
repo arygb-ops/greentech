@@ -36,6 +36,32 @@ Bu layihə, suvarmanı səmərəli idarə etmək üçün sensorları və ağıll
 
 ---
 
+## 🖥️ Dashboard-u sayt kimi açmaq
+
+### Tələblər
+
+- Node.js 18+ (və ya daha yeni)
+
+### Addımlar
+
+```bash
+npm install
+npm run dev
+```
+
+Brauzerdə bu ünvanı açın:
+
+- `http://localhost:5173`
+
+Prod build üçün:
+
+```bash
+npm run build
+npm run preview
+```
+
+---
+
 ## 🔥 İnnovasiya
 
 Ənənəvi monitorinq sistemlərindən fərqli olaraq, Smart Soil Doctor yalnız torpaq vəziyyətini izləmir, həm də gələcək torpaq sağlamlığını proqnozlaşdırır və resurslardan istifadəni optimallaşdırmaq üçün müstəqil qərarlar qəbul edir.
@@ -48,6 +74,7 @@ Bu layihə, suvarmanı səmərəli idarə etmək üçün sensorları və ağıll
 * Torpaq nəmlik sensoru
 * Temperatur sensoru
 * Su nasosu və idarəetmə modulu
+* React + Vite (dashboard veb interfeysi)
 
 ---
 
